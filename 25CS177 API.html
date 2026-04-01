@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fetch API</title>
+        <style>
+            body{
+                font-family: Verdana;
+                margin-top:60px;
+                text-align:center;
+            }
+            img{
+                border-radius:50px;
+            }
+            button-hover
+            {
+                cursor : pointer;
+                color:deeppink;
+            }
+            #user{
+                font-size:20px;
+                margin-top:50px;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Fetch API</h2>
+
+        <button onclick="getUser()">Get Random User</button>
+        <div id="user"></div>
+
+        <script>
+            async function getUser(){
+                try{
+                    let response = await fetch("https://randomuser.me/api/");
+                    let data = await response.json();
+                    let user = data.results[0];
+
+                    document.getElementById("user").innerHTML = `<img src="${user.picture.medium}"><br><br>
+                    Name: ${user.name.first} ${user.name.last} <br>
+                    Email: ${user.email} <br>
+                    Location: ${user.location.city}, ${user.location.country};
+                }
+                catch(error)
+                {
+                    console.log("Error fetching data: ",error);
+                }
+            }
+        </script>
+
+    </body>
+</html>
